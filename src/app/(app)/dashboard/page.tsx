@@ -1,3 +1,16 @@
+'use client';
+
+import { Typography } from '@mui/material';
+import Dashboard from '@/features/dashboard/components/Dashboard';
+
 export default function DashboardPage() {
-  return <h1>Dashboard</h1>;
+  return (
+    <>
+      <Typography variant="h4" gutterBottom>
+        Dashboard
+      </Typography>
+
+      <Dashboard />
+    </>
+  );
 }
