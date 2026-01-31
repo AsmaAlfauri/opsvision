@@ -1,13 +1,23 @@
+'use client';
+
 import { create } from 'zustand';
 
-export type UserRole = 'admin' | 'viewer';
+type Role = 'admin' | 'viewer' | 'guest';
 
 interface AuthState {
-  role: UserRole;
-  setRole: (role: UserRole) => void;
+  role: Role;
+  loginAsAdmin: () => void;
+  loginAsViewer: () => void;
+  loginAsGuest: () => void;
+  logout: () => void;
+  setRole: (role: Role) => void;
 }
 
 export const useAuthStore = create<AuthState>((set) => ({
-  role: 'admin',
+  role: 'guest',
+  loginAsAdmin: () => set({ role: 'admin' }),
+  loginAsViewer: () => set({ role: 'viewer' }),
+  loginAsGuest: () => set({ role: 'guest' }),
+  logout: () => set({ role: 'guest' }),
   setRole: (role) => set({ role }),
 }));
