@@ -1,24 +1,26 @@
 'use client';
 
-import { useAuthStore } from '@/store/authStore';
-import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import { useAuthStore } from '@/app/store/authStore';
 
-export default function ProtectedRoute({
-  children,
-}: {
+interface ProtectedRouteProps {
   children: React.ReactNode;
-}) {
-  const user = useAuthStore((s) => s.user);
+}
+
+export default function ProtectedRoute({ children }: ProtectedRouteProps) {
+  const role = useAuthStore((s) => s.role);
   const router = useRouter();
 
   useEffect(() => {
-    if (!user) {
+
+    if (!role || role === 'guest') {
       router.replace('/login');
     }
-  }, [user, router]);
+  }, [role, router]);
 
-  if (!user) return null;
+
+  if (!role || role === 'guest') return null;
 
   return <>{children}</>;
 }
