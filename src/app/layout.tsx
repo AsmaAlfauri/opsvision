@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import MuiRegistry from '@/lib/mui/MuiRegistry';
-
+import MuiRegistry from "@/app/lib/mui/MuiRegistry";
 
 export const metadata: Metadata = {
-  title: 'OpsVision',
-  description: 'Internal Analytics Dashboard',
+  title: "OpsVision",
+  description: "Internal Analytics Dashboard",
 };
 
 export default function RootLayout({
@@ -14,8 +13,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-       <html lang="en">
-      <body>
+    <html lang="en" suppressHydrationWarning>
+      <body className="antialiased">
         <MuiRegistry>{children}</MuiRegistry>
       </body>
     </html>
