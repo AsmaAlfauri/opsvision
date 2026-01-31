@@ -2,7 +2,7 @@
 
 import { Button, Stack, Typography } from '@mui/material';
 import { useRouter } from 'next/navigation';
-import { useAuthStore } from '@/store/authStore';
+import { useAuthStore } from '@/app/store/authStore';
 
 export default function LoginPage() {
   const router = useRouter();

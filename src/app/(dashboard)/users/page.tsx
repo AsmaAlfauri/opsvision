@@ -1,24 +1,15 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { useAuthStore } from '@/store/authStore';
-import UsersTable from './components/UsersTable';
-import UsersSkeleton from './components/UsersTableSkeleton';
+import UsersTable from '@/app/features/users/components/UsersTable';
+import { useAuthStore } from '@/app/store/authStore';
+import Error from '@/app/components/States/Error';
 
 export default function UsersPage() {
-  const role = useAuthStore(s => s.role);
-  const [loading, setLoading] = useState(true);
+  const role = useAuthStore((s) => s.role);
 
-  useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 1000); 
-    return () => clearTimeout(timer);
-  }, []);
+  if (!role || role !== 'admin') {
+    return <Error message="Unauthorized: You do not have access to this page." />;
+  }
 
-  if (role !== 'admin') return <p>Unauthorized</p>;
-
-  return (
-    <>
-      {loading ? <UsersSkeleton /> : <UsersTable />}
-    </>
-  );
+  return <UsersTable />;
 }
